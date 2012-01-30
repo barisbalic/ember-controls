@@ -60,40 +60,21 @@ test('submit should call target action with data', function() {
   ok(formData.second == "value2", 'it should call target with valid data');
 });
 
-test('submit should call target action with data from submit arguments', function() {
-  var wasCalled = false;
-
-  form.reopen({
-    template: Ember.Handlebars.compile('\
-        {{view Ember.TextField name="first" value="value1"}}  \
-    ')
-  })
-
-  var actionObject = Ember.Object.create({
-    myAction: function(data) {
-      wasCalled = true;
-    }
-  });
-
-  append(form);
-
-  form.submit(actionObject, 'myAction');
-
-  ok(wasCalled, 'it should call target');
-});
-
 test('submit should evaluate target if String was specified', function() {
   var wasCalled = false;
-  
+
   Ember.actionObject = Ember.Object.create({
     myAction: function(data) {
       wasCalled = true;
     }
   });
 
+  set(form, 'target', 'Ember.actionObject')
+  set(form, 'action', 'myAction')
+
   append(form);
 
-  form.submit('Ember.actionObject', 'myAction');
+  form.submit();
 
   ok(wasCalled, 'it should call target');
 });
