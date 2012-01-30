@@ -7,17 +7,17 @@ Ember.Form = Ember.View.extend({
 
   data: {},
 
-  submit: function() {
-    var target = get(this, 'target'),
-        action = get(this, 'action'),
+  submit: function(target, action) {
+    var target = target || get(this, 'target');
+    ember_assert('Target has to be specified', target != undefined);
+    var action = action || get(this, 'action'),
         firstView = get(this, 'childViews').get('firstObject'),
         childViews = get(firstView, 'childViews'),
         input, name, data = {};
-    
+
     childViews.forEach(function(view, idx) {
       name = get(view, 'name');
       
-
       if(name) {
         data[name] = get(view, 'value');
       }  

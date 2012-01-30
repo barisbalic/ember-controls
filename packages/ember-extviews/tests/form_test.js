@@ -38,10 +38,10 @@ test('submit should call target action with data', function() {
 
   form.reopen({
     template: Ember.Handlebars.compile('\
-      {{#view Ember.Form action="login"}}       \
-        {{#view Ember.TextField id="foo" name="bar" value="baz"}}      \
-        {{/view}}                               \
-      {{/view}}                                 \
+      {{#view Ember.Form}}                                    \
+        {{view Ember.TextField name="first" value="value1"}}  \
+        {{view Ember.TextField name="second" value="value2"}} \
+      {{/view}}                                               \
     ')
   })
 
@@ -58,5 +58,38 @@ test('submit should call target action with data', function() {
 
   form.submit();
 
-  ok(formData.bar == "baz", 'it should call target with valid data');
+  ok(formData.first == "value1", 'it should call target with valid data');
+  ok(formData.second == "value2", 'it should call target with valid data');
+});
+
+test('submit should call target action with data from submit arguments', function() {
+  var wasCalled = false;
+
+  form.reopen({
+    template: Ember.Handlebars.compile('\
+      {{#view Ember.Form}}                                    \
+        {{view Ember.TextField name="first" value="value1"}}  \
+      {{/view}}                                               \
+    ')
+  })
+
+  var actionObject = Ember.Object.create({
+    myAction: function(data) {
+      wasCalled = true;
+    }
+  });
+
+  append();
+
+  form.submit(actionObject, 'myAction');
+
+  ok(wasCalled, 'it should call target');
+});
+
+test('submit should fail if target was not specified', function() {
+  append();
+
+  raises(function() {
+    form.submit();
+  }, Error);
 });
