@@ -5,15 +5,23 @@ Ember.Form = Ember.View.extend({
 
   tagName: 'form',
 
-  data: {},
-
+  /*
+   * Call a target action with object, containing all collected
+   * data from formular input fields.
+   *
+   * @param {Ember.Object} Object, which receives call.
+   * @param {String} Target action to be called.
+   */
   submit: function(target, action) {
-    var target = target || get(this, 'target');
-    ember_assert('Target has to be specified', target != undefined);
-    var action = action || get(this, 'action'),
-        firstView = get(this, 'childViews').get('firstObject'),
+    var target = target || get(this, 'target'),
+        action = action || get(this, 'action');
+    
+    ember_assert('target has to be Ember.Object', target instanceof Ember.Object);
+    ember_assert('action has to be String', typeof action == 'string');
+
+    var firstView = get(this, 'childViews').get('firstObject'),
         childViews = get(firstView, 'childViews'),
-        input, name, data = {};
+        name, data = {};
 
     childViews.forEach(function(view, idx) {
       name = get(view, 'name');

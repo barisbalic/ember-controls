@@ -86,10 +86,20 @@ test('submit should call target action with data from submit arguments', functio
   ok(wasCalled, 'it should call target');
 });
 
-test('submit should fail if target was not specified', function() {
+test('submit should fail if target is not Ember.Object', function() {
   append();
 
   raises(function() {
     form.submit();
+  }, Error);
+});
+
+test('submit should fail if action is not specified', function() {
+  append();
+
+  var object = Ember.Object.create();
+
+  raises(function() {
+    form.submit(object);
   }, Error);
 });
