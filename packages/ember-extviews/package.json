@@ -1,0 +1,30 @@
+{
+  "name": "ember-extviews",
+  "summary": "Set of extended views for Ember.js",
+  "description": "",
+  "homepage": "https://github.com/petrjanda/ember-extviews",
+  "author": "Petr Janda",
+  "version": "0.0.1",
+
+  "directories": {
+    "lib": "lib"
+  },
+  
+  "dependencies": {
+    "spade": "~> 1.0",
+    "ember-runtime": ">= 0"
+  },
+  "dependencies:development": {
+    "spade-qunit": "~> 1.0.0"
+  },
+  "bpm:build": {
+    "bpm_libs.js": {
+      "files": ["lib"],
+      "modes": "*"
+    },
+    "ember-extviews/bpm_tests.js": {
+      "files": ["tests"],
+      "modes": ["debug"]
+    }
+  }
+}
