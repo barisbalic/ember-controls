@@ -15,20 +15,20 @@ module("Ember.Form", {
   },
 });
 
-function append() {
+function append(view) {
   Ember.run(function() {
-    form.appendTo('#qunit-fixture');
+    view.appendTo('#qunit-fixture');
   });
 }
 
 test("should have ember-form class", function() {
-  append();
+  append(form);
 
   ok(form.$().hasClass("ember-form"));
 });
 
 test("should have tag name form", function() {
-  append();
+  append(form);
 
   ok(form.$().is('form'));
 });
@@ -38,10 +38,8 @@ test('submit should call target action with data', function() {
 
   form.reopen({
     template: Ember.Handlebars.compile('\
-      {{#view Ember.Form}}                                    \
         {{view Ember.TextField name="first" value="value1"}}  \
         {{view Ember.TextField name="second" value="value2"}} \
-      {{/view}}                                               \
     ')
   })
 
@@ -54,7 +52,7 @@ test('submit should call target action with data', function() {
   set(form, 'action', 'myAction');
   set(form, 'target', actionObject);
 
-  append();
+  append(form);
 
   form.submit();
 
@@ -67,9 +65,7 @@ test('submit should call target action with data from submit arguments', functio
 
   form.reopen({
     template: Ember.Handlebars.compile('\
-      {{#view Ember.Form}}                                    \
         {{view Ember.TextField name="first" value="value1"}}  \
-      {{/view}}                                               \
     ')
   })
 
@@ -79,7 +75,7 @@ test('submit should call target action with data from submit arguments', functio
     }
   });
 
-  append();
+  append(form);
 
   form.submit(actionObject, 'myAction');
 
@@ -87,7 +83,7 @@ test('submit should call target action with data from submit arguments', functio
 });
 
 test('submit should fail if target is not Ember.Object', function() {
-  append();
+  append(form);
 
   raises(function() {
     form.submit();
@@ -95,7 +91,7 @@ test('submit should fail if target is not Ember.Object', function() {
 });
 
 test('submit should fail if action is not specified', function() {
-  append();
+  append(form);
 
   var object = Ember.Object.create();
 

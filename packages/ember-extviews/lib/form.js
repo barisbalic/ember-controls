@@ -5,6 +5,10 @@ Ember.Form = Ember.View.extend({
 
   tagName: 'form',
 
+  action: '',
+
+  target: null,
+
   /*
    * Call a target action with object, containing all collected
    * data from formular input fields.
@@ -14,14 +18,12 @@ Ember.Form = Ember.View.extend({
    */
   submit: function(target, action) {
     var target = target || get(this, 'target'),
-        action = action || get(this, 'action');
+        action = action || get(this, 'action'),
+        childViews = get(this, 'childViews'),
+        name, data = {};
     
     ember_assert('target has to be Ember.Object', target instanceof Ember.Object);
     ember_assert('action has to be String', typeof action == 'string');
-
-    var firstView = get(this, 'childViews').get('firstObject'),
-        childViews = get(firstView, 'childViews'),
-        name, data = {};
 
     childViews.forEach(function(view, idx) {
       name = get(view, 'name');
