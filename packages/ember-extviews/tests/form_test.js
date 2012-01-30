@@ -82,6 +82,22 @@ test('submit should call target action with data from submit arguments', functio
   ok(wasCalled, 'it should call target');
 });
 
+test('submit should evaluate target if String was specified', function() {
+  var wasCalled = false;
+  
+  Ember.actionObject = Ember.Object.create({
+    myAction: function(data) {
+      wasCalled = true;
+    }
+  });
+
+  append(form);
+
+  form.submit('Ember.actionObject', 'myAction');
+
+  ok(wasCalled, 'it should call target');
+});
+
 test('submit should fail if target is not Ember.Object', function() {
   append(form);
 

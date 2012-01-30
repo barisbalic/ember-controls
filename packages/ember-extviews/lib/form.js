@@ -28,7 +28,7 @@ Ember.Form = Ember.View.extend({
    * Call a target action with object, containing all collected
    * data from formular input fields.
    *
-   * @param {Ember.Object} Object, which receives call.
+   * @param {Ember.Object | String} Object, which receives call.
    * @param {String} Target action to be called.
    */
   submit: function(target, action) {
@@ -36,6 +36,10 @@ Ember.Form = Ember.View.extend({
         action = action || get(this, 'action'),
         childViews = get(this, 'childViews'),
         name, data = {};
+
+    if(typeof target == 'string') {
+      target = Ember.getPath(target);
+    }
     
     ember_assert('target has to be Ember.Object', target instanceof Ember.Object);
     ember_assert('action has to be String', typeof action == 'string');
