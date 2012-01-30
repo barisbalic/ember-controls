@@ -1,5 +1,20 @@
 var set = Ember.set, get = Ember.get;
 
+/*
+ * Formular view to be used to generate form HTML elements. It can have multiple
+ * child views and the ones with the name attribute would be collected to the
+ * data object once the form is submited.
+ *
+ * Usage:
+ * {{#view Ember.Form action="myAction" target="App.statechart"}}
+ *   {{view Ember.TextField name="title"}}
+ *   {{view Ember.SubmitButton value="Send"}}
+ * {{/view}}
+ *
+ * myAction: function(data) {
+ *   console.log(data); //= {title: 'foo'} 
+ * }
+ */
 Ember.Form = Ember.View.extend({
   classNames: ['ember-form'],
 
