@@ -59,8 +59,7 @@ Ember.Form = Ember.View.extend({
       target = Ember.getPath(target);
     }
     
-    ember_assert('target has to be Ember.Object', target instanceof Ember.Object);
-    ember_assert('action has to be String', typeof action == 'string');
+    ember_assert('target[action] has to be Function', typeof target[action] == 'function');
 
     childViews.forEach(function(view, idx) {
       name = get(view, 'name');

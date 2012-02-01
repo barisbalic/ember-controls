@@ -79,21 +79,18 @@ test('submit should evaluate target if String was specified', function() {
   ok(wasCalled, 'it should call target');
 });
 
-test('submit should fail if target is not Ember.Object', function() {
+test('submit should fail if target action is not a function', function() {
   append(form);
+
+  var object = Ember.Object.create({
+    foo: 'bar'
+  });
+
+  set(form, 'target', object)
+  set(form, 'action', 'foo')
 
   raises(function() {
     form.submit();
-  }, Error);
-});
-
-test('submit should fail if action is not specified', function() {
-  append(form);
-
-  var object = Ember.Object.create();
-
-  raises(function() {
-    form.submit(object);
   }, Error);
 });
 
