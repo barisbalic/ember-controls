@@ -96,3 +96,22 @@ test('submit should fail if action is not specified', function() {
     form.submit(object);
   }, Error);
 });
+
+test('set date should fill in values to inputs', function() {
+  var formData = null;
+
+  form.reopen({
+    template: Ember.Handlebars.compile('\
+      {{view Ember.TextField name="first"}}  \
+    ')
+  })
+
+  append(form);
+
+  var first = form.get('childViews').get('firstObject'),
+      second = form.get('childViews').get('lastObject');
+
+  form.set('data', {first: 'value1'});
+
+  ok(first.get('value') == 'value1');
+});

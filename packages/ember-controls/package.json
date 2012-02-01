@@ -1,8 +1,8 @@
 {
-  "name": "ember-extviews",
+  "name": "ember-controls",
   "summary": "Set of extended views for Ember.js",
   "description": "",
-  "homepage": "https://github.com/petrjanda/ember-extviews",
+  "homepage": "https://github.com/petrjanda/ember-controls",
   "author": "Petr Janda",
   "version": "0.0.1",
 
@@ -22,7 +22,7 @@
       "files": ["lib"],
       "modes": "*"
     },
-    "ember-extviews/bpm_tests.js": {
+    "ember-controls/bpm_tests.js": {
       "files": ["tests"],
       "modes": ["debug"]
     }

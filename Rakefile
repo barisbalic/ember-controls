@@ -56,16 +56,16 @@ end
 
 # Create ember:package tasks for each of the Ember packages
 namespace :ember do
-  %w(extviews).each do |package|
+  %w(controls).each do |package|
     task package => compile_package_task("ember-#{package}", "ember-#{package}")
   end
 end
 
 # Create a build task that depends on all of the package dependencies
-task :build => ["ember:extviews"]
+task :build => ["ember:controls"]
 
 distributions = {
-  "ember-extviews" => ["ember-extviews"]
+  "ember-controls" => ["ember-controls"]
 }
 
 distributions.each do |name, libraries|
@@ -122,7 +122,7 @@ task :sample => :dist do
   sh "rm -f #{vendor_file}; touch #{vendor_file}"
   sh "cat packages/jquery-1.6.2/lib/main.js >> #{vendor_file}"
   sh "cat packages/ember/lib/main.js >> #{vendor_file}"
-  sh "cat dist/ember-extviews.js >> #{vendor_file}"
+  sh "cat dist/ember-controls.js >> #{vendor_file}"
 end
 
 desc "Build files necessary to view samples"
