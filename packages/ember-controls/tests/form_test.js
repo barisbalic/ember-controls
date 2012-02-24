@@ -94,7 +94,7 @@ test('submit should fail if target action is not a function', function() {
   }, Error);
 });
 
-test('set date should fill in values to inputs', function() {
+test('set data should fill in values to inputs', function() {
   var formData = null;
 
   form.reopen({
