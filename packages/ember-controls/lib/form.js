@@ -32,27 +32,6 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
   data: {},
 
   /*
-   * Listen on the data change in order to update the values of the
-   * input fields within the form.
-   *
-   * @private
-   */
-  _updateValues: Ember.observer(function() {
-    var data = this.get('data'),
-        childViews = this.get('childViews');
-
-    // Iterate through children and update the values.
-    childViews.forEach(function(view, idx) {
-      name = get(view, 'name');
-
-      if(data[name]) {
-        set(view, 'value', data[name]);
-      }  
-    })
-
-  }, 'data'),
-
-  /*
    * Call a target action with object, containing all collected
    * data from formular input fields.
    */
@@ -72,7 +51,31 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
     this._super();
   },
 
+  /*
+   * Fancy alias.
+   */
   submit: function() {
     this.triggerAction();
-  }
+  },
+
+  /*
+   * Listen on the data change in order to update the values of the
+   * input fields within the form.
+   *
+   * @private
+   */
+  _updateValues: Ember.observer(function() {
+    var data = this.get('data'),
+        childViews = this.get('childViews');
+
+    // Iterate through children and update the values.
+    childViews.forEach(function(view, idx) {
+      name = get(view, 'name');
+
+      if(data[name]) {
+        set(view, 'value', data[name]);
+      }  
+    })
+
+  }, 'data')
 })
