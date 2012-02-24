@@ -32,10 +32,9 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
   data: {},
 
   /*
-   * Call a target action with object, containing all collected
-   * data from formular input fields.
+   * Collect data from inputs and trigger target action.
    */
-  triggerAction: function() {
+  submit: function() {
     var childViews = get(this, 'childViews'),
         name, data = {};
 
@@ -48,13 +47,6 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
     });
 
     this.set('data', data);
-    this._super();
-  },
-
-  /*
-   * Fancy alias.
-   */
-  submit: function() {
     this.triggerAction();
   },
 
