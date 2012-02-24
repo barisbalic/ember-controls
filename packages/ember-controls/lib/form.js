@@ -34,8 +34,10 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
   /*
    * Listen on the data change in order to update the values of the
    * input fields within the form.
+   *
+   * @private
    */
-  updateValues: Ember.observer(function() {
+  _updateValues: Ember.observer(function() {
     var data = this.get('data'),
         childViews = this.get('childViews');
 
