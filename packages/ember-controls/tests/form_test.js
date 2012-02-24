@@ -33,7 +33,7 @@ test("should have tag name form", function() {
   ok(form.$().is('form'));
 });
 
-test('submit should call target action with data', function() {
+test('submit should call target action and store data', function() {
   var formData = null;
 
   form.reopen({
@@ -44,8 +44,8 @@ test('submit should call target action with data', function() {
   })
 
   var actionObject = Ember.Object.create({
-    myAction: function(data) {
-      formData = data;
+    myAction: function(form) {
+      formData = form.get('data')
     }
   });
 
