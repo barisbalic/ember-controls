@@ -59,6 +59,17 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
   },
 
   /*
+   * Clear the current values in form.
+   */
+  clear: function() {
+    var childViews = this.get('childViews');
+
+    childViews.forEach(function(view) {
+      view.set('value', '');
+    })
+  },
+
+  /*
    * Listen on the data change in order to update the values of the
    * input fields within the form.
    *

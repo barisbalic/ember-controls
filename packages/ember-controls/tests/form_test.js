@@ -112,3 +112,21 @@ test('set data should fill in values to inputs', function() {
 
   ok(first.get('value') == 'value1');
 });
+
+test('clear should remove all the current values', function() {
+  var formData = null;
+
+  form.reopen({
+    template: Ember.Handlebars.compile('\
+      {{view Ember.TextField name="first" value="foo"}}  \
+    ')
+  })
+
+  append(form);
+
+  var first = form.get('childViews').get('firstObject');
+
+  form.clear();
+
+  ok(first.get('value') == '');
+});
