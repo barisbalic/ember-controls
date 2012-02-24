@@ -2,6 +2,27 @@ var set = Ember.set, get = Ember.get;
 
 /*
  * Formular view to be used to generate form HTML elements.
+ *
+ *   {{#view Ember.Form
+ *           target="App.object"
+ *           action="submit"}}
+ *     {{view Ember.TextField name="field"}}
+ *     {{view Ember.SubmitButton}}
+ *   {{/view}}
+ *
+ * After click to submit button will result in call to App.statechart.submit
+ * with form as the only argument. You can then use the instance to fetch its
+ * data from callback:
+ *
+ *   App.object = Ember.Object.create({
+ *     submit: function(form) {
+ *       var data = form.get('data');
+ *     }
+ *   })
+ *
+ * Where data is pure key/value object with values collected from fields
+ * which were present in formular. Every HTML element with attribute 'name'
+ * is considered and its value is collected.
  */
 Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
   classNames: ['ember-form'],
@@ -44,7 +65,7 @@ Ember.Form = Ember.View.extend(Ember.TargetActionSupport, {
         data[name] = get(view, 'value');
       }  
     });
-    
+
     this.set('data', data);
     this._super();
   },
