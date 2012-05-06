@@ -1,0 +1,30 @@
+{
+  "name": "ember-utils",
+  "summary": "Ember utilities",
+  "description": "",
+  "homepage": "https://github.com/petrjanda/ember-controls",
+  "author": "Petr Janda",
+  "version": "0.0.1",
+
+  "directories": {
+    "lib": "lib"
+  },
+  
+  "dependencies": {
+    "spade": "~> 1.0",
+    "ember-runtime": ">= 0"
+  },
+  "dependencies:development": {
+    "spade-qunit": "~> 1.0.0"
+  },
+  "bpm:build": {
+    "bpm_libs.js": {
+      "files": ["lib"],
+      "modes": "*"
+    },
+    "ember-controls/bpm_tests.js": {
+      "files": ["tests"],
+      "modes": ["debug"]
+    }
+  }
+}
