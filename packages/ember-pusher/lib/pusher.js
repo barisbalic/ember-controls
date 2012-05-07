@@ -57,6 +57,10 @@ Em.Pusher = Em.Object.extend(Em.Delegate, {
   */
   state: 'uninitialized',
 
+  connected: function() {
+    return this.get('state') == 'connected';
+  }.property('state').cacheable(),
+  
   /**
     List of channels.
 
@@ -253,10 +257,10 @@ Em.PusherChannel = Em.Object.extend({
     @param {String} Action to be triggered on target.
   */
   on: function(event, target, action) {
-    key = [event, target, action].join('_');
+    var key = [event, target, action].join('_'),
 
     callback = function(data) {
-      target[action].call(target, data);
+      target[action].call(target, data, event);
     };
 
     this.transport.bind(event, callback);
